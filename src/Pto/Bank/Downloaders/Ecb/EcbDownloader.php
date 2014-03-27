@@ -2,6 +2,7 @@
 
 namespace Pto\Bank\Downloaders\Ecb;
 
+use Pto\Bank\Downloaders\DownloadRates;
 use Pto\Objects\Currency;
 
 class EcbDownloader extends DownloadRates

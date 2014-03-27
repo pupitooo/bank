@@ -2,6 +2,7 @@
 
 namespace Pto\Bank\Downloaders\Cnb;
 
+use Pto\Bank\Downloaders\DownloadRates;
 use Pto\Objects\Currency;
 use Pto\Helpers;
 
