@@ -85,14 +85,14 @@ In Presenter
 
 In Latte
 <pre>
-    <p>{1|currency} = {1|currencyTo:"EUR"}</p>
-    <p>{1|currency} = {1|currencyTo:"CZK"}</p>
-    <p>{1|currency} = {1|currencyTo:"USD"}</p>
-    <p>{1|currency} = {1|currencyTo:"GBP"}</p>
+    {1|currency} = {1|currencyTo:"EUR"}
+    {1|currency} = {1|currencyTo:"CZK"}
+    {1|currency} = {1|currencyTo:"USD"}
+    {1|currency} = {1|currencyTo:"GBP"}
 
-    <p>{1|currency:"CZK"} = {1|currency:"CZK":"EUR"}</p>
-    <p>{1|currency:"USD"} = {1|currency:"USD":"EUR"}</p>
-    <p>{1|currency:"GBP"} = {1|currency:"GBP":"USD"}</p>
+    {1|currency:"CZK"} = {1|currency:"CZK":"EUR"}
+    {1|currency:"USD"} = {1|currency:"USD":"EUR"}
+    {1|currency:"GBP"} = {1|currency:"GBP":"USD"}
 </pre>
 
 
