@@ -2,7 +2,8 @@
 
 namespace Pto\Bank;
 
-use Pto\Bank\Downloaders;
+use Pto\Bank\Downloaders\Cnb\CnbDownloader;
+use Pto\Bank\Downloaders\Ecb\EcbDownloader;
 use Pto\Bank\Storages;
 use Pto\Objects\Currency;
 use Nette\Http\SessionSection;
@@ -117,12 +118,12 @@ class Bank
     {
         switch ($method) {
             case self::DOWNLOAD_METHOD_CNB:
-                $this->downloader = new Downloaders\CnbDownloader;
+                $this->downloader = new CnbDownloader;
                 $this->downloader->addAnother();
                 break;
             case self::DOWNLOAD_METHOD_ECB:
             default:
-                $this->downloader = new Downloaders\EcbDownloader;
+                $this->downloader = new EcbDownloader;
                 break;
         }
     }

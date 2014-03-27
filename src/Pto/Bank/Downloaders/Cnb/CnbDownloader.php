@@ -1,6 +1,6 @@
 <?php
 
-namespace Pto\Bank\Downloaders;
+namespace Pto\Bank\Downloaders\Cnb;
 
 use Pto\Objects\Currency;
 use Pto\Helpers;

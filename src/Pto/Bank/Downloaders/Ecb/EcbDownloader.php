@@ -1,6 +1,6 @@
 <?php
 
-namespace Pto\Bank\Downloaders;
+namespace Pto\Bank\Downloaders\Ecb;
 
 use Pto\Objects\Currency;
 
