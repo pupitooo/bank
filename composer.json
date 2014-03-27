@@ -1,0 +1,26 @@
+{
+    "name": "pupitooo/bank",
+    "type": "library",
+    "description": "PHP script works with currencies",
+    "homepage": "https://github.com/pupitooo/bank",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Petr Poupě",
+            "email": "pupe.dupe@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "nette/nette": ">=2.1",
+        "kdyby/curl": "@dev",
+        "pupitooo/helpers": "@dev",
+        "pupitooo/objects": "@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Pupitooo\\Bank": "src/"
+        }
+    }
+}
