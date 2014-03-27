@@ -140,8 +140,9 @@ class Bank
         return $this->downloader;
     }
 
-    private function getActualRate($code)
+    public function getActualRate($code)
     {
+        $code = Currency::code($code);
         $rate = $this->getRateFromStorage($code);
         if ($rate !== NULL) {
             return $rate;
@@ -177,7 +178,7 @@ class Bank
     {
         $price = (float) $price;
 
-        $to = $to ? $to : $this->getDefault();
+        $to = $to === NULL ? $from : ($to ? $to : $this->getDefault());
 
         if ($from !== FALSE && $to) {
             $from = $from ? $from : $this->getDefault();
@@ -206,9 +207,9 @@ class Bank
      */
     public function format($number, $from = NULL, $to = NULL)
     {
-        $to = $to ? $to : $this->getDefault();
+        $from = $from ? $from : $this->getDefault();
         $number = $this->change($number, $from, $to, NULL);
-        $toCurrency = $this->loadCurrency($to);
+        $toCurrency = $this->loadCurrency($to ? $to : $from);
         return $toCurrency->profil->render($number);
     }
     

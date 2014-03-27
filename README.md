@@ -24,6 +24,70 @@ The best way to install Pupitooo/Bank is using  [Composer](http://getcomposer.or
 $ composer require pupitooo/bank:@dev
 ```
 
+Example NEON config
+-------------------
+<pre>
+services:
+    - Pto\Bank\Storages\Storage
+    - Nette\Http\SessionSection(@session, 'bank')
+    bank:
+            class: Pto\Bank\Bank
+            setup: 
+                    - loadCurrency('EUR', NULL, {mask: '1 S', thousand: ' ', point: ',', zeroClear: FALSE, decimal: 2, symbol: € })
+                    - loadCurrency('CZK', NULL, {mask: '1 S', thousand: ' ', point: ',', zeroClear: FALSE, decimal: 2, symbol: Kč})
+                    - loadCurrency('USD')
+</pre>
+
+Example Nette 2.1 use
+-------------------
+In Presenter
+
+<pre>
+    /** @var \Pto\Bank\Bank @inject */
+    public $bank;
+
+    protected function startup()
+    {
+        parent::startup();
+
+        $bank = $this->bank;
+
+        $bank->setDownload(\Pto\Bank\Bank::DOWNLOAD_METHOD_CNB);
+
+        $bank->loadCurrency("CZK")
+                ->setRate(27.8);
+        $bank->loadCurrency("USD", NULL)
+                ->setProfil(array('mask' => 'S 1', 'thousand' => ',', 'point' => '.', 'zeroClear' => FALSE, 'decimal' => 2, 'symbol' => '$'));
+        $bank->loadCurrency("GBP", NULL, array('mask' => 'S 1', 'thousand' => ',', 'point' => '.', 'zeroClear' => FALSE, 'decimal' => 2, 'symbol' => '£'));
+    }
+
+    public function actionDefault()
+    {
+        $bank = $this->bank;
+
+        Nette\Diagnostics\Debugger::barDump($bank->change(1, "EUR", "CZK"));
+        Nette\Diagnostics\Debugger::barDump($bank->change(1, "EUR", "GBP"));
+        Nette\Diagnostics\Debugger::barDump($bank->change(1, "EUR", "HUF"));
+
+        Nette\Diagnostics\Debugger::barDump($bank->format(1, "EUR"));
+        Nette\Diagnostics\Debugger::barDump($bank->format(1, "EUR", "CZK"));
+        Nette\Diagnostics\Debugger::barDump($bank->format(1, "EUR", "USD"));
+        Nette\Diagnostics\Debugger::barDump($bank->format(1, "EUR", "GBP"));
+        
+        \Nette\Diagnostics\Debugger::barDump($bank->getDefault());
+        \Nette\Diagnostics\Debugger::barDump($bank->getActualRate("EUR"));
+        \Nette\Diagnostics\Debugger::barDump($bank->getActualRate("CZK"));
+        \Nette\Diagnostics\Debugger::barDump($bank->getActualRate("GBP"));
+        \Nette\Diagnostics\Debugger::barDump($bank->getActualRate("USD"));
+        \Nette\Diagnostics\Debugger::barDump($bank->getActualRate("HUF"));
+    }
+</pre>
+
+In Latte
+<pre>
+    {1|currency} = {1|currencyTo:"CZK"}
+</pre>
+
 
 -----
 
